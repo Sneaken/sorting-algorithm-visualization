@@ -17,9 +17,11 @@ const BubbleSort = () => {
   const isSortingRef = useRef(false);
   const isContinueRef = useRef<boolean>(true);
   const useRAFRef = useRef<boolean>(false);
+  const delayRef = useRef(100);
   isContinueRef.current = isContinue;
   isSortingRef.current = isSorting;
   useRAFRef.current = useRAF;
+  delayRef.current = delay;
 
   const arrRef = useRef<ItemData[]>([]);
   arrRef.current = arr;
@@ -87,12 +89,12 @@ const BubbleSort = () => {
     const result = bubbleSort(arrRef.current);
     setArr(result);
     if (currentCountRef.current !== result.length) {
-      useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delay);
+      useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delayRef.current);
     } else {
       init()
       forceUpdate();
     }
-  }, [bubbleSort, delay, forceUpdate]);
+  }, [bubbleSort, forceUpdate]);
   useEffect(() => {
     if (isContinue && isSortingRef.current) {
       sortData();

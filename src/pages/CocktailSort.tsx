@@ -17,9 +17,11 @@ const CocktailSort = () => {
   const isSortingRef = useRef(false);
   const isContinueRef = useRef<boolean>(true);
   const useRAFRef = useRef<boolean>(false);
+  const delayRef = useRef(100);
   isContinueRef.current = isContinue;
   isSortingRef.current = isSorting;
   useRAFRef.current = useRAF;
+  delayRef.current = delay;
 
   const arrRef = useRef<ItemData[]>([]);
   arrRef.current = arr;
@@ -165,12 +167,12 @@ const CocktailSort = () => {
     const result = cocktailSort(arrRef.current);
     setArr(result);
     if (currentCountRef.current !== result.length) {
-      useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delay);
+      useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delayRef.current);
     } else {
       init(result.length)
       forceUpdate();
     }
-  }, [cocktailSort, delay, forceUpdate]);
+  }, [cocktailSort, forceUpdate]);
   useEffect(() => {
     if (isContinue && isSortingRef.current) {
       sortData();
