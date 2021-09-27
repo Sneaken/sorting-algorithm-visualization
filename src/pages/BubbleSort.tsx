@@ -25,12 +25,20 @@ const BubbleSort = () => {
   arrRef.current = arr;
   const iRef = useRef<number>(0);
   const jRef = useRef<number>(0);
+  const currentCountRef = useRef(0);
 
   const shouldSwapRef = useRef(false);
 
   const changeData = useCallback(() => {
     setArr(JSON.parse(JSON.stringify(data)));
+    init()
   }, [data]);
+  const init = () => {
+    isSortingRef.current = false;
+    iRef.current = 0;
+    jRef.current = 0;
+    currentCountRef.current = 0;
+  }
   useEffect(() => {
     changeData();
   }, [changeData]);
@@ -66,10 +74,11 @@ const BubbleSort = () => {
           list[j - 1].status = undefined;
         }
         list[j].status = 'finished';
+        currentCountRef.current++;
       }
       return [...list];
     }
-    return list.map((i) => ({ status: 'finished', value: i.value }));
+    return [...list];
   }, []);
 
   const sortData = useCallback(() => {
@@ -77,12 +86,10 @@ const BubbleSort = () => {
     isSortingRef.current = true;
     const result = bubbleSort(arrRef.current);
     setArr(result);
-    if (result.filter((i) => i.status === 'finished').length !== result.length) {
+    if (currentCountRef.current !== result.length) {
       useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delay);
     } else {
-      isSortingRef.current = false;
-      iRef.current = 0;
-      jRef.current = 0;
+      init()
       forceUpdate();
     }
   }, [bubbleSort, delay, forceUpdate]);
