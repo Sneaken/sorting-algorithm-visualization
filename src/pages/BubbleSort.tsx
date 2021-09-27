@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { useHistory } from 'react-router-dom';
 import { useForceUpdate } from '../hooks/useForceUpdate';
 import ConfigContext from '../contexts/ConfigContext';
+import { useConfig } from '../hooks/useConfig';
 
 interface ItemData {
   status?: 'current' | 'finished' | 'target';
@@ -14,14 +15,7 @@ const BubbleSort = () => {
   const history = useHistory();
   const [arr, setArr] = useState<ItemData[]>([]);
   const forceUpdate = useForceUpdate();
-  const isSortingRef = useRef(false);
-  const isContinueRef = useRef<boolean>(true);
-  const useRAFRef = useRef<boolean>(false);
-  const delayRef = useRef(100);
-  isContinueRef.current = isContinue;
-  isSortingRef.current = isSorting;
-  useRAFRef.current = useRAF;
-  delayRef.current = delay;
+  const { isSortingRef, isContinueRef, useRAFRef, delayRef } = useConfig({ isContinue, isSorting, useRAF, delay });
 
   const arrRef = useRef<ItemData[]>([]);
   arrRef.current = arr;
@@ -31,16 +25,17 @@ const BubbleSort = () => {
 
   const shouldSwapRef = useRef(false);
 
-  const changeData = useCallback(() => {
-    setArr(JSON.parse(JSON.stringify(data)));
-    init()
-  }, [data]);
-  const init = () => {
+  const init = useCallback(() => {
     isSortingRef.current = false;
     iRef.current = 0;
     jRef.current = 0;
     currentCountRef.current = 0;
-  }
+  }, [isSortingRef]);
+  const changeData = useCallback(() => {
+    setArr(JSON.parse(JSON.stringify(data)));
+    init();
+  }, [data, init]);
+
   useEffect(() => {
     changeData();
   }, [changeData]);
@@ -91,15 +86,15 @@ const BubbleSort = () => {
     if (currentCountRef.current !== result.length) {
       useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delayRef.current);
     } else {
-      init()
+      init();
       forceUpdate();
     }
-  }, [bubbleSort, forceUpdate]);
+  }, [bubbleSort, delayRef, forceUpdate, init, isContinueRef, isSortingRef, useRAFRef]);
   useEffect(() => {
     if (isContinue && isSortingRef.current) {
       sortData();
     }
-  }, [isContinue, sortData, isSorting]);
+  }, [isContinue, sortData, isSorting, isSortingRef]);
 
   return (
     <div>

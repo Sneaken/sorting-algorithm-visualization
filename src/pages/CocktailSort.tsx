@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { useHistory } from 'react-router-dom';
 import { useForceUpdate } from '../hooks/useForceUpdate';
 import ConfigContext from '../contexts/ConfigContext';
+import {useConfig} from "../hooks/useConfig";
 
 interface ItemData {
   status?: 'current' | 'finished' | 'target';
@@ -14,14 +15,7 @@ const CocktailSort = () => {
   const history = useHistory();
   const [arr, setArr] = useState<ItemData[]>([]);
   const forceUpdate = useForceUpdate();
-  const isSortingRef = useRef(false);
-  const isContinueRef = useRef<boolean>(true);
-  const useRAFRef = useRef<boolean>(false);
-  const delayRef = useRef(100);
-  isContinueRef.current = isContinue;
-  isSortingRef.current = isSorting;
-  useRAFRef.current = useRAF;
-  delayRef.current = delay;
+  const { isSortingRef, isContinueRef, useRAFRef, delayRef } = useConfig({ isContinue, isSorting, useRAF, delay });
 
   const arrRef = useRef<ItemData[]>([]);
   arrRef.current = arr;
@@ -38,11 +32,7 @@ const CocktailSort = () => {
   // 表示向右是否有序
   const isSortedToRightRef = useRef(true);
 
-  const changeData = useCallback(() => {
-    setArr(JSON.parse(JSON.stringify(data)));
-    init(data.length)
-  }, [data]);
-  const init = (dataLength: number) => {
+  const init = useCallback((dataLength: number) => {
     leftRef.current = 0;
     rightRef.current = dataLength - 1;
     iRef.current = 0;
@@ -54,7 +44,12 @@ const CocktailSort = () => {
 
     shouldLeftSwapRef.current = false;
     shouldRightSwapRef.current = false;
-  }
+  }, []);
+  const changeData = useCallback(() => {
+    setArr(JSON.parse(JSON.stringify(data)));
+    init(data.length)
+  }, [data, init]);
+
   useEffect(() => {
     changeData();
   }, [changeData]);
@@ -172,12 +167,12 @@ const CocktailSort = () => {
       init(result.length)
       forceUpdate();
     }
-  }, [cocktailSort, forceUpdate]);
+  }, [cocktailSort, delayRef, forceUpdate, init, isContinueRef, isSortingRef, useRAFRef]);
   useEffect(() => {
     if (isContinue && isSortingRef.current) {
       sortData();
     }
-  }, [isContinue, sortData, isSorting]);
+  }, [isContinue, sortData, isSorting, isSortingRef]);
 
   return (
     <div>
