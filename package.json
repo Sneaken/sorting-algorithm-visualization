@@ -10,6 +10,7 @@
     "sass": "^1.42.1"
   },
   "devDependencies": {
+    "@craco/craco": "^6.3.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -19,7 +20,6 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.3.0",
     "autoprefixer": "^9",
-    "craco": "^0.0.3",
     "postcss": "^7",
     "react-scripts": "4.0.3",
     "tailwindcss": "yarn:@tailwindcss/postcss7-compat",

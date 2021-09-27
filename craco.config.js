@@ -1,3 +1,4 @@
+process.env.BUILD_PATH = 'docs'
 module.exports = {
   style: {
     postcss: {
