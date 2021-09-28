@@ -1,3 +1,14 @@
+# [0.3.0](https://github.com/Sneaken/sorting-algorithm-visualization/compare/v0.2.1...v0.3.0) (2021-09-28)
+
+
+### Features
+
+* 抽离交换函数 ([af402fc](https://github.com/Sneaken/sorting-algorithm-visualization/commit/af402fc433044cc17eb4bab346f358a8e7ffccf4))
+* 完善选择排序 ([89b6ae5](https://github.com/Sneaken/sorting-algorithm-visualization/commit/89b6ae5be1f5140d2d94985432476c137f479816))
+* 选择排序 ([af1b04b](https://github.com/Sneaken/sorting-algorithm-visualization/commit/af1b04bf6d7abd73a8e30da4df6f7d632fe66d4a))
+
+
+
 ## [0.2.1](https://github.com/Sneaken/sorting-algorithm-visualization/compare/v0.2.0...v0.2.1) (2021-09-28)
 
 
