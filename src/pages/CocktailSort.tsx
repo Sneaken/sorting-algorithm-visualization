@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { useHistory } from 'react-router-dom';
 import { useForceUpdate } from '../hooks/useForceUpdate';
 import ConfigContext from '../contexts/ConfigContext';
-import {useConfig} from "../hooks/useConfig";
+import { useConfig } from '../hooks/useConfig';
 
 interface ItemData {
   status?: 'current' | 'finished' | 'target';
@@ -47,7 +47,7 @@ const CocktailSort = () => {
   }, []);
   const changeData = useCallback(() => {
     setArr(JSON.parse(JSON.stringify(data)));
-    init(data.length)
+    init(data.length);
   }, [data, init]);
 
   useEffect(() => {
@@ -164,7 +164,7 @@ const CocktailSort = () => {
     if (currentCountRef.current !== result.length) {
       useRAFRef.current ? requestAnimationFrame(sortData) : setTimeout(sortData, delayRef.current);
     } else {
-      init(result.length)
+      init(result.length);
       forceUpdate();
     }
   }, [cocktailSort, delayRef, forceUpdate, init, isContinueRef, isSortingRef, useRAFRef]);

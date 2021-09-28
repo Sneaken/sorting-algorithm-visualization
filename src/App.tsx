@@ -5,6 +5,7 @@ import AllSort from './pages/AllSort';
 import ConfigProvider from './components/ConfigProvider';
 import Configurator from './components/Configurator';
 import CocktailSort from './pages/CocktailSort';
+import SelectionSort from './pages/SelectionSort';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path='/' exact component={AllSort} />
               <Route path='/bubble-sort' exact component={BubbleSort} />
               <Route path='/cocktail-sort' exact component={CocktailSort} />
+              <Route path='/selection-sort' exact component={SelectionSort} />
             </Switch>
           </HashRouter>
         </ConfigProvider>
