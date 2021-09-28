@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/Sneaken/sorting-algorithm-visualization/compare/v0.3.0...v0.3.1) (2021-09-28)
+
+
+### Bug Fixes
+
+* should not prettier docs ([1d79229](https://github.com/Sneaken/sorting-algorithm-visualization/commit/1d7922903e32abfebee92b9a07f7f4b9db6a2542))
+
+
+
 # [0.3.0](https://github.com/Sneaken/sorting-algorithm-visualization/compare/v0.2.1...v0.3.0) (2021-09-28)
 
 
