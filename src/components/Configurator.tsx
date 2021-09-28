@@ -45,7 +45,7 @@ const Configurator = () => {
       <div className='flex'>
         <label className='flex-1'>
           数据数量：
-          <input type='number' value={count || ''} onChange={handleCountChange} />
+          <input type='number' value={count || ''} onChange={handleCountChange} disabled={isSorting} />
         </label>
         <label className='flex-1'>
           延迟：
