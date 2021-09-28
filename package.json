@@ -51,7 +51,7 @@
     "commit": "git-cz"
   },
   "lint-staged": {
-    "*.js": [
+    "!(docs/**/*).js": [
       "prettier --write"
     ],
     "*.ts?(x)": [
