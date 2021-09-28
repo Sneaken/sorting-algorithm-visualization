@@ -1,11 +1,15 @@
+function swap(list: number[], from: number, to: number) {
+  const temp = list[from];
+  list[from] = list[to];
+  list[to] = temp;
+}
+
 export function bubbleSort(list: number[] = []) {
   for (let i = 0; i < list.length; i++) {
     let isSorted = true;
     for (let j = 0; j < list.length - i - 1; j++) {
       if (list[j] > list[j + 1]) {
-        const swap = list[j];
-        list[j] = list[j + 1];
-        list[j + 1] = swap;
+        swap(list, j, j + 1);
         isSorted = false;
       }
     }
@@ -26,9 +30,7 @@ export function cocktailSort(list: number[]) {
     // 向右
     for (let i = 0; i < list.length - left - 1; i++) {
       if (list[i] > list[i + 1]) {
-        const swap = list[i + 1];
-        list[i + 1] = list[i];
-        list[i] = swap;
+        swap(list, i + 1, i);
         isSorted = false;
       }
     }
@@ -40,9 +42,7 @@ export function cocktailSort(list: number[]) {
     // 向左
     for (let i = right; i >= left; i--) {
       if (list[i - 1] > list[i]) {
-        const swap = list[i];
-        list[i] = list[i - 1];
-        list[i - 1] = swap;
+        swap(list, i, i - 1);
         isSorted = false;
       }
     }
@@ -64,9 +64,7 @@ export function selectionSort(list: number[]) {
         minIndex = j;
       }
     }
-    const minSwap = list[minIndex];
-    list[minIndex] = list[i];
-    list[i] = minSwap;
+    swap(list, minIndex, i);
   }
   return list;
 }
