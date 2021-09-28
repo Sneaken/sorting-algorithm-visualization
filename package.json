@@ -30,6 +30,7 @@
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
     "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
     "minimist": "^1.2.5",
     "postcss": "^7",
     "prettier": "^2.4.1",
@@ -46,7 +47,8 @@
     "preinstall": "node ./scripts/checkYarn.js",
     "prepare": "husky install",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "git-cz"
   },
   "lint-staged": {
     "*.js": [
