@@ -17,7 +17,7 @@ export function bubbleSort(list: number[] = []) {
 }
 
 // 鸡尾酒排序
-export default function cocktailSort(list: number[]) {
+export function cocktailSort(list: number[]) {
   let left = 0;
   let right = list.length - 1;
   while (left < right) {
@@ -50,6 +50,23 @@ export default function cocktailSort(list: number[]) {
     if (isSorted) {
       break;
     }
+  }
+  return list;
+}
+
+// 选择排序
+export function selectionSort(list: number[]) {
+  let minIndex;
+  for (let i = 0; i < list.length - 1; i++) {
+    minIndex = i;
+    for (let j = i + 1; j < list.length - 1 - i; j++) {
+      if (list[j] < list[minIndex]) {
+        minIndex = j;
+      }
+    }
+    const minSwap = list[minIndex];
+    list[minIndex] = list[i];
+    list[i] = minSwap;
   }
   return list;
 }
